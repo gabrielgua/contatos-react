@@ -2,12 +2,11 @@ import styled from 'styled-components'
 import vars from '../../styles/vars'
 
 const HeaderWrapper = styled.header`
-  padding: 2rem;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-block: 4rem;
 `
 
 export const HeaderTitle = styled.h1`
