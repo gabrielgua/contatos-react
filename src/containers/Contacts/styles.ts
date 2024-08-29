@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import vars from '../../styles/vars'
 
 const ContactsHeader = styled.div`
   display: flex;

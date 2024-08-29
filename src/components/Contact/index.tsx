@@ -6,10 +6,11 @@ import {
   ContactHeader,
   ContactInfo,
   ContactInput,
+  ContactNewBadge,
   ContactTitle
 } from './styles'
 import { Button } from '../../styles'
-import { Contact as ContactType } from '../../types/contact'
+import { Contact as ContactType, isNew } from '../../types/contact'
 
 type ContactProps = {
   contact: ContactType
@@ -23,6 +24,11 @@ const Contact = ({ contact }: ContactProps) => {
       <ContactHeader>
         <ContactAvatar>#{contact.id}</ContactAvatar>
         <ContactTitle>{contact.fullName}</ContactTitle>
+        {isNew(contact) && (
+          <ContactNewBadge title="Contato adicionado recentemente.">
+            Novo
+          </ContactNewBadge>
+        )}
       </ContactHeader>
       <ContactInfo>
         <ContactInput
