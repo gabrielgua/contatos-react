@@ -5,7 +5,7 @@ export type Contact = {
   fullName: string
   email: string
   phoneNumber: string
-  createdAt: Date
+  createdAt: string
 }
 
 export const isNew = (contact: Contact) => {

@@ -24,23 +24,23 @@ export const Container = styled.div`
 `
 
 type ButtonProps = {
-  secondary?: boolean
-  danger?: boolean
+  $secondary?: boolean
+  $danger?: boolean
 }
 
 export const Button = styled.button<ButtonProps>`
   --clr: ${(props) => {
-    if (props.secondary) return vars.clrTextPrimary
-    else if (props.danger) return vars.clrDanger
+    if (props.$secondary) return vars.clrTextPrimary
+    else if (props.$danger) return vars.clrDanger
     return vars.clrPrimary
   }};
   --clrRGB: ${(props) => {
-    if (props.secondary) return vars.clrTextPrimaryRGB
-    else if (props.danger) return vars.clrDangerRGB
+    if (props.$secondary) return vars.clrTextPrimaryRGB
+    else if (props.$danger) return vars.clrDangerRGB
 
     return vars.clrPrimaryRGB
   }};
-  --clrText: ${(props) => (props.secondary ? 'black' : vars.clrTextPrimary)};
+  --clrText: ${(props) => (props.$secondary ? 'black' : vars.clrTextPrimary)};
   width: max-content;
   border: none;
   padding: 0.75rem 1rem;
