@@ -18,7 +18,7 @@ const Header = () => {
           Linkedin
         </HeaderLink>
         <HeaderLink
-          href="https://github.com/gabrielgua/agenda-contatos-react"
+          href="https://github.com/gabrielgua/contatos-react"
           target="_blank"
         >
           Repositório do projeto
