@@ -76,8 +76,8 @@ export const ContactNameTextarea = styled.textarea<ContactInputProps>`
   resize: none;
   font-size: 18px;
   overflow: hidden;
-  height: ${(props) => (props.height ? props.height + 'px' : 'auto')};
-
+  height: ${(props) => props.height + 'px'};
+  scroll-behavior: auto;
   border: none;
   background-color: transparent;
 

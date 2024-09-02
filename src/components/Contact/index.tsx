@@ -77,6 +77,7 @@ const Contact = ({ contact }: ContactProps) => {
 
     if (!canEdit(editedContact)) {
       resetContactFields()
+      alert('E-mail ou telefone já cadastrados!')
       return
     }
 
@@ -84,15 +85,23 @@ const Contact = ({ contact }: ContactProps) => {
     setIsEditing(false)
   }
 
+  const cancelEdit = () => {
+    resetContactFields()
+
+    //trick to fullName area have time to ajust its size before setting the editing state to false
+    setTimeout(() => {
+      setIsEditing(false)
+    }, 100)
+  }
+
   const resetContactFields = () => {
-    alert('E-mail ou telefone já cadastrados!')
-    setIsEditing(false)
     setEmail(contact.email)
+    setFullName(contact.fullName)
     setPhoneNumber(contact.phoneNumber)
   }
 
-  const autoGrow = (event: FormEvent<HTMLTextAreaElement>) => {
-    setTextareaHeight(event.currentTarget.scrollHeight)
+  const autoGrow = () => {
+    setTextareaHeight(textarea.current?.scrollHeight!)
   }
 
   return (
@@ -130,16 +139,22 @@ const Contact = ({ contact }: ContactProps) => {
       </ContactInfo>
       <ContactActions>
         {isEditing ? (
-          <Button $secondary onClick={editContact}>
-            Salvar
-          </Button>
+          <>
+            <Button $secondary onClick={editContact}>
+              Salvar
+            </Button>
+            <Button $danger onClick={cancelEdit}>
+              Cancelar
+            </Button>
+          </>
         ) : (
-          <Button $secondary onClick={() => setIsEditing(!isEditing)}>
-            Editar
-          </Button>
+          <>
+            <Button $secondary onClick={() => setIsEditing(!isEditing)}>
+              Editar
+            </Button>
+            <Button $danger>Remover</Button>
+          </>
         )}
-
-        <Button $danger>Remover</Button>
       </ContactActions>
     </ContactCard>
   )
