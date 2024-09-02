@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import Contacts from '../../containers/Contacts'
 import { Contact } from '../../types/contact'
 
 type ContactState = {
