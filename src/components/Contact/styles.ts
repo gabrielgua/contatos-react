@@ -9,6 +9,7 @@ export const ContactCard = styled.div`
   border: 1px solid rgba(${vars.clrSecondaryRGB}, 0.5);
   border-radius: 1.5rem;
   gap: 1rem;
+  position: relative;
 `
 export const ContactHeader = styled.div`
   display: flex;
@@ -40,6 +41,9 @@ export const ContactNewBadge = styled.p`
   font-weight: bold;
   font-size: 12px;
   border-radius: 1rem;
+  position: absolute;
+  top: -0.5rem;
+  left: 1rem;
 `
 
 export const ContactInfo = styled.div`
@@ -51,6 +55,7 @@ export const ContactInfo = styled.div`
 
 type ContactInputProps = {
   disabled?: boolean
+  height?: number
 }
 
 export const ContactInput = styled.input<ContactInputProps>`
@@ -64,14 +69,30 @@ export const ContactInput = styled.input<ContactInputProps>`
   padding: 0.25rem 0rem;
 `
 
+export const ContactNameTextarea = styled.textarea<ContactInputProps>`
+  color: ${vars.clrTextPrimary};
+  width: 100%;
+  font-weight: bold;
+  resize: none;
+  font-size: 18px;
+  overflow: hidden;
+  height: ${(props) => (props.height ? props.height + 'px' : 'auto')};
+
+  border: none;
+  background-color: transparent;
+
+  border-bottom: ${(props) =>
+    props.disabled ? '' : `1px solid ${vars.clrTextPrimary}`};
+`
+
 export const ContactActions = styled.div`
-  display: flex;
-  align-content: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   width: 100%;
   margin-top: auto;
 
   button {
-    flex-grow: 1;
+    width: 100%;
   }
 `

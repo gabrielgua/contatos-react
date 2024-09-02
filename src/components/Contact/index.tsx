@@ -1,4 +1,11 @@
-import { useState } from 'react'
+import {
+  FormEvent,
+  FormEventHandler,
+  TextareaHTMLAttributes,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import {
   ContactActions,
   ContactAvatar,
@@ -6,6 +13,7 @@ import {
   ContactHeader,
   ContactInfo,
   ContactInput,
+  ContactNameTextarea,
   ContactNewBadge,
   ContactTitle
 } from './styles'
@@ -22,11 +30,18 @@ type ContactProps = {
 const Contact = ({ contact }: ContactProps) => {
   const contacts = useSelector((state: RootReducer) => state.contacts.items)
   const dispatch = useDispatch()
-  const [isEditing, setIsEditing] = useState(false)
 
+  const [isEditing, setIsEditing] = useState(false)
   const [email, setEmail] = useState(contact.email)
   const [fullName, setFullName] = useState(contact.fullName)
   const [phoneNumber, setPhoneNumber] = useState(contact.phoneNumber)
+
+  const [textareaHeight, setTextareaHeight] = useState(0)
+  const textarea = useRef<HTMLTextAreaElement>(null)
+
+  useEffect(() => {
+    setTextareaHeight(textarea.current?.scrollHeight!)
+  })
 
   const canEdit = (contact: ContactType) => {
     return isEmailAvailable(contact) && isPhoneAvailable(contact)
@@ -55,6 +70,7 @@ const Contact = ({ contact }: ContactProps) => {
   const editContact = () => {
     const editedContact: ContactType = {
       ...contact,
+      fullName,
       email,
       phoneNumber
     }
@@ -74,11 +90,24 @@ const Contact = ({ contact }: ContactProps) => {
     setEmail(contact.email)
     setPhoneNumber(contact.phoneNumber)
   }
+
+  const autoGrow = (event: FormEvent<HTMLTextAreaElement>) => {
+    setTextareaHeight(event.currentTarget.scrollHeight)
+  }
+
   return (
     <ContactCard key={contact.id}>
       <ContactHeader>
         <ContactAvatar>#{contact.id}</ContactAvatar>
-        <ContactTitle>{contact.fullName}</ContactTitle>
+        <ContactNameTextarea
+          ref={textarea}
+          onInput={autoGrow}
+          height={textareaHeight}
+          value={fullName}
+          disabled={!isEditing}
+          title={contact.fullName}
+          onChange={(e) => setFullName(e.target.value)}
+        />
         {isNew(contact) && (
           <ContactNewBadge title="Contato adicionado recentemente.">
             Novo

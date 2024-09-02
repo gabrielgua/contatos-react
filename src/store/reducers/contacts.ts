@@ -31,7 +31,7 @@ const initialState: ContactState = {
     },
     {
       id: 4,
-      fullName: 'Patrícia Bianca Juliana Almada',
+      fullName: 'Patrícia Bianca Juliana',
       email: 'patricia_bianca_almada@accent.com.br',
       phoneNumber: '(61) 992792224',
       createdAt: new Date().toISOString()
