@@ -1,11 +1,9 @@
-import {
-  FormEvent,
-  FormEventHandler,
-  TextareaHTMLAttributes,
-  useEffect,
-  useRef,
-  useState
-} from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+import { remove, save } from '../../store/reducers/contacts'
+import { Button } from '../../styles'
+import { Contact as ContactType, isNew } from '../../types/contact'
 import {
   ContactActions,
   ContactAvatar,
@@ -14,14 +12,8 @@ import {
   ContactInfo,
   ContactInput,
   ContactNameTextarea,
-  ContactNewBadge,
-  ContactTitle
+  ContactNewBadge
 } from './styles'
-import { Button } from '../../styles'
-import { Contact as ContactType, isNew } from '../../types/contact'
-import { useDispatch, useSelector } from 'react-redux'
-import { save } from '../../store/reducers/contacts'
-import { RootReducer } from '../../store'
 
 type ContactProps = {
   contact: ContactType
@@ -94,6 +86,10 @@ const Contact = ({ contact }: ContactProps) => {
     }, 100)
   }
 
+  const removeContact = (id: number) => {
+    dispatch(remove(id))
+  }
+
   const resetContactFields = () => {
     setEmail(contact.email)
     setFullName(contact.fullName)
@@ -152,7 +148,9 @@ const Contact = ({ contact }: ContactProps) => {
             <Button $secondary onClick={() => setIsEditing(!isEditing)}>
               Editar
             </Button>
-            <Button $danger>Remover</Button>
+            <Button $danger onClick={() => removeContact(contact.id)}>
+              Remover
+            </Button>
           </>
         )}
       </ContactActions>
