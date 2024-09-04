@@ -33,19 +33,6 @@ export const ContactTitle = styled.h4`
   color: ${vars.clrTextPrimary};
 `
 
-export const ContactNewBadge = styled.p`
-  margin-left: auto;
-  font-family: 'Roboto', monospace;
-  background-color: ${vars.clrTextPrimary};
-  padding: 0.125rem 0.5rem;
-  font-weight: bold;
-  font-size: 12px;
-  border-radius: 1rem;
-  position: absolute;
-  top: -0.5rem;
-  left: 1rem;
-`
-
 export const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;

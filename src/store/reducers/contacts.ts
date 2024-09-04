@@ -11,36 +11,31 @@ const initialState: ContactState = {
       id: 1,
       fullName: 'Francisca Isis Brito',
       email: 'francisca.isis.brito@dkcarmo.com',
-      phoneNumber: '(68) 98692-1506',
-      createdAt: new Date().toISOString()
+      phoneNumber: '(68) 98692-1506'
     },
     {
       id: 2,
       fullName: 'Lara Louise Fogaça',
       email: 'eduardo_lopes@gmail.com.br',
-      phoneNumber: '(86) 99838-4145',
-      createdAt: new Date().toISOString()
+      phoneNumber: '(86) 99838-4145'
     },
     {
       id: 3,
       fullName: 'Eduardo Danilo Martin Lopes',
       email: 'lara_louise_fogaca@sabesp.com.br',
-      phoneNumber: '(96) 98660-9966',
-      createdAt: '2024-09-01T20:59:00.000Z'
+      phoneNumber: '(96) 98660-9966'
     },
     {
       id: 4,
       fullName: 'Patrícia Bianca Juliana',
       email: 'patricia_bianca_almada@accent.com.br',
-      phoneNumber: '(61) 99279-2224',
-      createdAt: '2024-09-02T14:48:00.000-03:00'
+      phoneNumber: '(61) 99279-2224'
     },
     {
       id: 5,
       fullName: 'Pedro Guilherme Moreira',
       email: 'pedro-moreira95@libbero.com.br',
-      phoneNumber: '(68) 98618-1749',
-      createdAt: '2024-09-01T14:48:00.000Z'
+      phoneNumber: '(68) 98618-1749'
     }
   ]
 }
@@ -62,7 +57,6 @@ const contactSlice = createSlice({
       }
 
       contact.id = state.items.length <= 0 ? 1 : state.items.length + 1
-
       state.items = [...state.items, contact]
     },
     remove: (state, action: PayloadAction<number>) => {

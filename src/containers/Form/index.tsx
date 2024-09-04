@@ -17,23 +17,21 @@ const Form = () => {
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault()
-
     const contact: Contact = {
       id: 0,
       email,
       fullName,
-      phoneNumber,
-      createdAt: new Date().toISOString()
+      phoneNumber
     }
 
     dispatch(save(contact))
-    navigate('/home')
+    navigate('/')
   }
 
   return (
     <>
       <FormHeader>
-        <LinkButton to="/home" text="Voltar" />
+        <LinkButton to="/" text="Voltar" />
         <h2>Novo contato</h2>
       </FormHeader>
       <FormWrapper onSubmit={onSubmit}>

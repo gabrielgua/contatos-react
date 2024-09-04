@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import { remove, save } from '../../store/reducers/contacts'
 import { Button } from '../../styles'
-import { Contact as ContactType, isNew } from '../../types/contact'
+import { Contact as ContactType } from '../../types/contact'
 import {
   ContactActions,
   ContactAvatar,
@@ -11,8 +11,7 @@ import {
   ContactHeader,
   ContactInfo,
   ContactInput,
-  ContactNameTextarea,
-  ContactNewBadge
+  ContactNameTextarea
 } from './styles'
 
 type ContactProps = {
@@ -113,11 +112,6 @@ const Contact = ({ contact }: ContactProps) => {
           title={contact.fullName}
           onChange={(e) => setFullName(e.target.value)}
         />
-        {isNew(contact) && (
-          <ContactNewBadge title="Contato adicionado recentemente.">
-            Novo
-          </ContactNewBadge>
-        )}
       </ContactHeader>
       <ContactInfo>
         <ContactInput
