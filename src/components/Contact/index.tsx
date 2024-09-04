@@ -13,6 +13,7 @@ import {
   ContactInput,
   ContactNameTextarea
 } from './styles'
+import { validate } from '../../service/contacts'
 
 type ContactProps = {
   contact: ContactType
@@ -34,30 +35,6 @@ const Contact = ({ contact }: ContactProps) => {
     setTextareaHeight(textarea.current?.scrollHeight!)
   })
 
-  const canEdit = (contact: ContactType) => {
-    return isEmailAvailable(contact) && isPhoneAvailable(contact)
-  }
-
-  const isEmailAvailable = (contact: ContactType): boolean => {
-    const emailIndex = contacts.findIndex((c) => c.email === contact.email)
-    if (emailIndex >= 0) {
-      return contacts[emailIndex].id === contact.id
-    }
-
-    return true
-  }
-
-  const isPhoneAvailable = (contact: ContactType): boolean => {
-    const phoneIndex = contacts.findIndex(
-      (c) => c.phoneNumber === contact.phoneNumber
-    )
-    if (phoneIndex >= 0) {
-      return contacts[phoneIndex].id === contact.id
-    }
-
-    return true
-  }
-
   const editContact = () => {
     const editedContact: ContactType = {
       ...contact,
@@ -66,7 +43,7 @@ const Contact = ({ contact }: ContactProps) => {
       phoneNumber
     }
 
-    if (!canEdit(editedContact)) {
+    if (!validate(editedContact, contacts)) {
       resetContactFields()
       alert('E-mail ou telefone já cadastrados!')
       return

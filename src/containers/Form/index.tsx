@@ -4,11 +4,15 @@ import InputMaskComponent from '../../components/PhoneInput'
 import { Button, Input } from '../../styles'
 import { FormWrapper, FormHeader } from './styles'
 import { Contact } from '../../types/contact'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { save } from '../../store/reducers/contacts'
 import { useNavigate } from 'react-router-dom'
+import { validate } from '../../service/contacts'
+import { RootReducer } from '../../store'
 
 const Form = () => {
+  const contacts = useSelector((state: RootReducer) => state.contacts.items)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [fullName, setFullName] = useState('')
@@ -24,8 +28,15 @@ const Form = () => {
       phoneNumber
     }
 
-    dispatch(save(contact))
-    navigate('/')
+    if (validate(contact, contacts)) {
+      dispatch(save(contact))
+      navigate('/')
+      return
+    }
+
+    alert('E-mail ou telefone celular já cadastrados!')
+    setEmail('')
+    setPhoneNumber('')
   }
 
   return (
